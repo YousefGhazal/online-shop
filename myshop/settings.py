@@ -11,21 +11,26 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+env.read_env(env.str(str(BASE_DIR), ".env"))  # type: ignore
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*cd7k*sosr-6*6_t)^mbho3hn_#1t6=jwx5!rslu5grl76de5z'
+SECRET_KEY = env("SECRET_KEY",cast=str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG",cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", cast=list)
+
+SITE_ID = 1
 
 
 # Application definition
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CART_SESSION_ID = 'cart'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Stripe settings
+STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY", cast=str) # Publishable key
+STRIPE_SECRET_KEY = env("STRIPE_PUBLISHABLE_KEY", cast=str) # Secret key
+STRIPE_API_VERSION = '2022-08-01'
