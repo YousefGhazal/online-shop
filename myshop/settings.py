@@ -144,5 +144,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Stripe settings
 STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY", cast=str) # Publishable key
-STRIPE_SECRET_KEY = env("STRIPE_PUBLISHABLE_KEY", cast=str) # Secret key
+STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", cast=str) # Secret key
 STRIPE_API_VERSION = '2022-08-01'
