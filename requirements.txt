@@ -5,3 +5,4 @@ flower==1.1.0
 stripe==4.0.2
 django-environ==0.9.0
 WeasyPrint==56.1
+redis==4.3.4
