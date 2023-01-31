@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'coupons.apps.CouponsConfig',
 
     'rosetta',
+    'parler',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,18 @@ LANGUAGES = [
     ('es', _('Spanish')),
 ]
 
+# django-parler settings
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en'},
+        {'code': 'es'},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -165,4 +178,5 @@ STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET", cast=str)
 # Redis settings
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
-REDIS_DB = 1
+REDIS_DB = 19
+
